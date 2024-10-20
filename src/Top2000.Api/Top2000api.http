@@ -1,0 +1,6 @@
+@Top2000api_HostAddress = http://localhost:5156
+
+GET {{Top2000api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

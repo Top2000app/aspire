@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="src\Top2000.Api\Top2000api.csproj" />
+  <Properties Name="Visual Studio">
+    <Property Name="OpenWith" Value="17" />
+  </Properties>
+  <Folder Name="/Aspire/">
+    <Project Path="src\Top2000.Aspire.AppHost\Top2000.Aspire.AppHost.csproj" />
+    <Project Path="src\Top2000.Aspire.ServiceDefaults\Top2000.Aspire.ServiceDefaults.csproj" />
+  </Folder>
+  <Project Path="src\Top2000.Api\Top2000.Api.csproj" />
+</Solution>
