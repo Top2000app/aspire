@@ -1,4 +1,6 @@
-﻿namespace Top2000.Api.GraphQL;
+﻿using Top2000.Api.GraphQL.Repositories;
+
+namespace Top2000.Api.GraphQL;
 
 public class Edition
 {
@@ -7,23 +9,26 @@ public class Edition
     public DateTime EndUtcDateAndTime { get; set; }
     public bool HasPlayDateAndTime { get; set; }
 
-    public async Task<IEnumerable<TrackListing>> Tracks([Service] TrackListingRepository listingRepository)
+    public IEnumerable<Listing> Listings([Service] ListingRepository listingRepository)
     {
-        return await listingRepository.GetAllListingByEditions(Year);
+        return listingRepository.GetAllListingByEditions(Year);
     }
-}
-
-public class EditionPosition : Edition
-{
-    public int Position { get; set; }
 }
 
 public class Listing
 {
     public int TrackId { get; set; }
-    public int Edition { get; set; }
+    public int EditionYear { get; set; }
     public int Position { get; set; }
     public DateTime? PlayUtcDateAndTime { get; set; }
+    public Track Track([Service] TrackRepository trackRepository)
+    {
+        return trackRepository.GetTrackById(TrackId)!;
+    }
+    public Edition Edition([Service] EditionRepository editionRepository)
+    {
+        return editionRepository.GetByYear(EditionYear)!;
+    }
 }
 
 public class Track
@@ -33,21 +38,8 @@ public class Track
     public string Artist { get; set; }
     public int RecordedYear { get; set; }
 
-    public async Task<IEnumerable<EditionPosition>> EditionsAsync([Service] TrackListingRepository listingRepository)
+    public IEnumerable<Listing> Listings([Service] ListingRepository listingRepository)
     {
-        return await listingRepository.GetEditionsByTrackId(Id);
+        return listingRepository.GetAllListingByTrack(Id);
     }
-}
-
-public class TrackListing
-{
-    public int TrackId { get; set; }
-
-    public int Position { get; set; }
-
-    public DateTime PlayUtcDateAndTime { get; set; }
-
-    public string Title { get; set; } = string.Empty;
-
-    public string Artist { get; set; } = string.Empty;
 }

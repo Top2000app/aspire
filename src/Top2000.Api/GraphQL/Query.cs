@@ -1,32 +1,33 @@
-﻿using Top2000.Api.GraphQL.Types;
+﻿using Top2000.Api.GraphQL.Repositories;
+using Top2000.Api.GraphQL.Types;
 
 namespace Top2000.Api.GraphQL;
 
 public class Query
 {
-    public async Task<Edition> LatestAsync([Service] EditionRepository editionRepository)
+    public Edition Latest([Service] EditionRepository editionRepository)
     {
-        return await editionRepository.LatestAsync();
+        return editionRepository.Latest();
     }
 
-    public async Task<IEnumerable<Edition>> EditionsAsync([Service] EditionRepository editionRepository)
+    public IEnumerable<Edition> Editions([Service] EditionRepository editionRepository)
     {
-        return await editionRepository.AllEditionsAsync();
+        return editionRepository.AllEditions();
     }
 
-    public async Task<Edition?> CurrentAsync([Service] EditionRepository editionRepository)
+    public Edition? Current([Service] EditionRepository editionRepository)
     {
-        return await editionRepository.CurrentAsync();
+        return editionRepository.Current();
     }
 
-    public async Task<Edition?> GetEditionByYear([Service] EditionRepository editionRepository, int year)
+    public Edition? GetEditionByYear([Service] EditionRepository editionRepository, int year)
     {
-        return await editionRepository.GetByYear(year);
+        return editionRepository.GetByYear(year);
     }
 
-    public async Task<IEnumerable<Track>> SearchForTrack(TrackSearchType searchinput, [Service] TrackRepository trackRepository)
+    public IEnumerable<Track> SearchForTrack(TrackSearchType searchinput, [Service] TrackRepository trackRepository)
     {
-        return await trackRepository.SearchAsync(searchinput);
+        return trackRepository.Search(searchinput);
     }
 }
 

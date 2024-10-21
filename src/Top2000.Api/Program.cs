@@ -1,5 +1,7 @@
 using Top2000.Api.Database;
 using Top2000.Api.GraphQL;
+using Top2000.Api.GraphQL.GraphDb;
+using Top2000.Api.GraphQL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
@@ -7,7 +9,9 @@ builder.AddServiceDefaults();
 builder.Services
     .AddTransient<EditionRepository>()
     .AddTransient<TrackRepository>()
-    .AddTransient<TrackListingRepository>();
+    .AddTransient<ListingRepository>()
+    .AddSingleton<InMemoryDatabaseGraphDatabase>()
+    ;
 
 builder.Services.AddGraphQLServer()
     .ModifyRequestOptions(options =>
@@ -15,7 +19,7 @@ builder.Services.AddGraphQLServer()
         options.IncludeExceptionDetails = builder.Environment.IsDevelopment();
     })
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>()
+    // .AddMutationType<Mutation>()
     ;
 
 builder.AddSqlServerClient("sql");
@@ -45,6 +49,11 @@ app.UseHttpsRedirection();
 
 var db = app.Services.GetRequiredService<DbInitializer>();
 db.Initialize();
+
+var sqlConnectionFactory = app.Services.GetRequiredService<IDbConnectionFactory>();
+
+var graphDb = app.Services.GetRequiredService<InMemoryDatabaseGraphDatabase>();
+await graphDb.InitialiseAsync(sqlConnectionFactory);
 
 app.Run();
 
