@@ -3,16 +3,6 @@ using Top2000.Api.Database;
 
 namespace Top2000.Api.GraphQL;
 
-public class TracksRepository
-{
-    private readonly IDbConnectionFactory dbConnectionFactory;
-
-    public TracksRepository(IDbConnectionFactory dbConnectionFactory)
-    {
-        this.dbConnectionFactory = dbConnectionFactory;
-    }
-}
-
 public class EditionRepository
 {
     private readonly IDbConnectionFactory dbConnectionFactory;
@@ -59,4 +49,15 @@ public class EditionRepository
 
         return edition;
     }
+
+    public async Task<Edition> AddEditions(int year, bool hasValue)
+    {
+        var connection = await dbConnectionFactory.CreateConnectionAsync(CancellationToken.None);
+
+        var edition = await connection.QueryFirstAsync<Edition?>(
+           $"insert into edition value({year}, '{year}-12-25T23:00:00', '{year}-12-31T23:00:00', false");
+
+        return edition;
+    }
+
 }

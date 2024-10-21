@@ -14,6 +14,7 @@
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="8.2.1" />
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="8.0.2" />
     <PackageReference Include="Jerry.WaitForDependencies.Aspire.Hosting" Version="0.0.1" />
+    <PackageReference Include="NorthernNerds.Aspire.Neo4j" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

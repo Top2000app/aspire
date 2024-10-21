@@ -6,8 +6,8 @@ builder.AddServiceDefaults();
 
 builder.Services
     .AddTransient<EditionRepository>()
-    .AddTransient<ListingRepository>()
-    .AddTransient<TracksRepository>();
+    .AddTransient<TrackRepository>()
+    .AddTransient<TrackListingRepository>();
 
 builder.Services.AddGraphQLServer()
     .ModifyRequestOptions(options =>
@@ -15,6 +15,7 @@ builder.Services.AddGraphQLServer()
         options.IncludeExceptionDetails = builder.Environment.IsDevelopment();
     })
     .AddQueryType<Query>()
+    .AddMutationType<Mutation>()
     ;
 
 builder.AddSqlServerClient("sql");

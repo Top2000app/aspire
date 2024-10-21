@@ -1,4 +1,6 @@
-﻿namespace Top2000.Api.GraphQL;
+﻿using Top2000.Api.GraphQL.Types;
+
+namespace Top2000.Api.GraphQL;
 
 public class Query
 {
@@ -21,20 +23,10 @@ public class Query
     {
         return await editionRepository.GetByYear(year);
     }
+
+    public async Task<IEnumerable<Track>> SearchForTrack(TrackSearchType searchinput, [Service] TrackRepository trackRepository)
+    {
+        return await trackRepository.SearchAsync(searchinput);
+    }
 }
 
-public class Listing
-{
-    public int TrackId { get; set; }
-    public int Edition { get; set; }
-    public int Position { get; set; }
-    public DateTime? PlayUtcDateAndTime { get; set; }
-}
-
-public class Track
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string Artist { get; set; }
-    public int RecordedYear { get; set; }
-}
