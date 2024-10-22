@@ -26,7 +26,7 @@ public class UnitTest1
         var schema = new ServiceCollection()
             .AddGraphQL()
             .AddQueryType<Query>();
-        
+         
         var result = await schema.ExecuteRequestAsync("{ bestMovie { title } }");
     }
 }
