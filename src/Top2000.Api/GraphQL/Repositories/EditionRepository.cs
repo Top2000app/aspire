@@ -4,6 +4,9 @@ namespace Top2000.Api.GraphQL.Repositories;
 
 public class EditionRepository
 {
+    protected EditionRepository()
+    {
+    }
 
     private readonly InMemoryDatabaseGraphDatabase database;
 
@@ -29,7 +32,7 @@ public class EditionRepository
         Year = node.Id
     };
 
-    public Edition Latest()
+    public virtual Edition Latest()
     {
         return database.EditionNodes
             .OrderBy(x => x.Id)
