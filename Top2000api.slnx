@@ -1,14 +1,8 @@
 <Solution>
-  <Project Path="src\Top2000.Api\Top2000api.csproj" />
-  <Properties Name="Visual Studio">
-    <Property Name="OpenWith" Value="17" />
-  </Properties>
   <Folder Name="/Aspire/">
     <Project Path="src\Top2000.Aspire.AppHost\Top2000.Aspire.AppHost.csproj" />
     <Project Path="src\Top2000.Aspire.ServiceDefaults\Top2000.Aspire.ServiceDefaults.csproj" />
-    <Project Path="D:\top2000app\aspire\src\Top2000.Aspire.AppHost\Top2000.Aspire.AppHost.csproj" />
-    <Project Path="D:\top2000app\aspire\src\Top2000.Aspire.ServiceDefaults\Top2000.Aspire.ServiceDefaults.csproj" />
   </Folder>
   <Project Path="src\Top2000.Api\Top2000.Api.csproj" />
-  <Project Path="D:\top2000app\aspire\src\Top2000.Api\Top2000.Api.csproj" />
+  <Project Path="tests\Top2000.Api.Tests\Top2000.Api.Tests.csproj" Type="Classic C#" />
 </Solution>
